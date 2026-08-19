@@ -434,13 +434,42 @@
             max-width: 200px;
         }
 
-        /* Responsive */
-        @media (max-width: 900px) {
-            .challenge-layout, .ui-system-split { grid-template-columns: 1fr; }
-            .direction-grid { grid-template-columns: 1fr; }
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 1024px) {
+            .container { padding: 0 40px; }
+            section { padding: 80px 0; }
+            .hero-content { padding-top: 80px; }
+            
+            .challenge-layout, .ui-system-split { grid-template-columns: 1fr; gap: 40px; }
+            .direction-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+        }
+        
+        @media (max-width: 768px) {
+            .container { padding: 0 24px; }
+            section { padding: 60px 0; }
+            
             .hero h1 { font-size: 3.5rem; }
             h2 { font-size: 2rem; }
+            
+            .direction-grid { grid-template-columns: 1fr; }
             .cinematic-frame:nth-child(n) { transform: none; }
+            
+            /* Game frames must adapt */
+            .game-frame { max-width: 100%; border-width: 1px; }
+            .game-frame-screen { max-width: 100%; }
+            .game-frame-screen img { max-width: 100%; height: auto; }
+            
+            .role-title-main { font-size: 2.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            section { padding: 40px 0; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero-subtitle { font-size: 1rem; }
+            h2 { font-size: 1.6rem; }
+            
+            .hero-meta { flex-direction: column; gap: 16px; }
+            .game-frame-corner { width: 12px; height: 12px; }
         }
     </style>
 </head>
@@ -451,7 +480,7 @@
 <!-- ═══════════════════════════════════════════════════════ -->
 <header class="hero bg-texture">
     <div class="hero-bg">
-        <img src="assets/media_1787091139294.png" alt="The World of Binzoi">
+        <img src=".user_uploaded/media_1787091139294.png" alt="The World of Binzoi">
     </div>
 
     <div class="hero-content">
@@ -485,7 +514,7 @@
                 <span class="frame-title">Binzoi — Splash Screen</span>
             </div>
             <div class="game-frame-screen">
-                <img src="assets/media_1787091109955.jpg" alt="Binzoi Splash Screen">
+                <img src=".user_uploaded/media_1787091109955.jpg" alt="Binzoi Splash Screen">
             </div>
         </div>
     </div>
@@ -514,7 +543,7 @@
                     <span class="frame-title">Character Selection</span>
                 </div>
                 <div class="game-frame-screen">
-                    <img src="assets/media_1787091123964.png" alt="Binzoi Character Selection">
+                    <img src=".user_uploaded/media_1787091123964.png" alt="Binzoi Character Selection">
                 </div>
             </div>
         </div>
@@ -582,7 +611,7 @@
                     <span class="frame-title">Inventory — Selected State</span>
                 </div>
                 <div class="game-frame-screen">
-                    <img src="assets/media_1787087968947.jpg" alt="Inventory UI System">
+                    <img src=".user_uploaded/media_1787087968947.jpg" alt="Inventory UI System">
                 </div>
             </div>
             <div class="ui-copy">
@@ -671,7 +700,7 @@
                     <span class="frame-title">Character Selection — Jinx Selected</span>
                 </div>
                 <div class="game-frame-screen">
-                    <img src="assets/media_1787091123964.png" alt="Character Selection UI System">
+                    <img src=".user_uploaded/media_1787091123964.png" alt="Character Selection UI System">
                 </div>
             </div>
         </div>
@@ -694,7 +723,7 @@
                 <span class="frame-title">The World of Binzoi — Landing</span>
             </div>
             <div class="game-frame-screen">
-                <img src="assets/media_1787091139294.png" alt="Binzoi Landing Screen">
+                <img src=".user_uploaded/media_1787091139294.png" alt="Binzoi Landing Screen">
             </div>
         </div>
     </div>
@@ -719,7 +748,7 @@
                     <span class="frame-title">Splash Screen</span>
                 </div>
                 <div class="game-frame-screen">
-                    <img src="assets/media_1787091109955.jpg" alt="Binzoi Splash Screen">
+                    <img src=".user_uploaded/media_1787091109955.jpg" alt="Binzoi Splash Screen">
                 </div>
             </div>
             
@@ -730,7 +759,7 @@
                     <span class="frame-title">Landing</span>
                 </div>
                 <div class="game-frame-screen">
-                    <img src="assets/media_1787091139294.png" alt="Binzoi Landing">
+                    <img src=".user_uploaded/media_1787091139294.png" alt="Binzoi Landing">
                 </div>
             </div>
 
@@ -741,7 +770,7 @@
                     <span class="frame-title">Character Selection</span>
                 </div>
                 <div class="game-frame-screen">
-                    <img src="assets/media_1787091123964.png" alt="Character Selection">
+                    <img src=".user_uploaded/media_1787091123964.png" alt="Character Selection">
                 </div>
             </div>
             
@@ -752,7 +781,7 @@
                     <span class="frame-title">Inventory</span>
                 </div>
                 <div class="game-frame-screen">
-                    <img src="assets/media_1787087968947.jpg" alt="Binzoi Inventory">
+                    <img src=".user_uploaded/media_1787087968947.jpg" alt="Binzoi Inventory">
                 </div>
             </div>
 
@@ -778,4 +807,3 @@
 
 </body>
 </html>
-

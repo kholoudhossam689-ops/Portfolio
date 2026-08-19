@@ -302,16 +302,131 @@
             color: var(--text-primary);
         }
 
-        /* Responsive */
+        /* =====================================================
+           RESPONSIVE — TABLET  (≤ 1024 px)
+           ===================================================== */
         @media (max-width: 1024px) {
+            /* Nav */
+            nav { padding: 28px 0; gap: 24px; }
+            .nav-links { gap: 24px; }
+
+            /* Hero */
             .hero h1 { font-size: 3.5rem; }
-            .project-card, .project-card:nth-child(even) {
+            .hero { padding: 10vh 0 8vh 0; }
+
+            /* Work */
+            .work-section { padding: 60px 0; }
+
+            /* Project cards — collapse to single column */
+            .project-grid { gap: 72px; }
+            .project-card,
+            .project-card:nth-child(even) {
                 grid-template-columns: 1fr;
                 gap: 40px;
             }
             .project-card:nth-child(even) .project-image-wrapper { order: 1; }
             .project-card:nth-child(even) .project-info { order: 2; padding: 0; }
             .project-info { padding-left: 0; }
+
+            /* About section — reduce padding */
+            #about { padding: 60px 0 !important; }
+            #about > div:last-child { gap: 60px !important; }
+
+            /* Footer */
+            footer { padding: 60px 0 40px 0; }
+            .footer-cta h2 { font-size: 2.4rem; }
+        }
+
+        /* =====================================================
+           RESPONSIVE — MOBILE LANDSCAPE  (≤ 768 px)
+           ===================================================== */
+        @media (max-width: 768px) {
+            /* Nav — stack logo above links */
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+                padding: 24px 0;
+            }
+            .nav-links { gap: 20px; flex-wrap: wrap; }
+            .nav-links a { font-size: 13px; }
+
+            /* Hero */
+            .hero { padding: 8vh 0 6vh 0; max-width: 100%; }
+            .hero h1 { font-size: 2.8rem; }
+            .hero p { font-size: 1.05rem; }
+
+            /* Work */
+            .work-section { padding: 48px 0; }
+            .project-grid { gap: 56px; }
+            .project-title { font-size: 2rem; }
+            .project-description { font-size: 1rem; margin-bottom: 28px; }
+
+            /* Images always fluid */
+            .project-image-wrapper { width: 100%; }
+            .project-image-wrapper img { max-width: 100%; height: auto; display: block; }
+
+            /* About grid — single column */
+            #about { padding: 48px 0 !important; }
+            #about > div:last-child {
+                grid-template-columns: 1fr !important;
+                gap: 40px !important;
+            }
+            #about h2 { font-size: 2.2rem !important; }
+
+            /* Footer */
+            footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 40px;
+                padding: 48px 0 36px 0;
+            }
+            .footer-cta h2 { font-size: 2rem; }
+            .footer-cta a { font-size: 1rem; }
+        }
+
+        /* =====================================================
+           RESPONSIVE — MOBILE PORTRAIT  (≤ 480 px)
+           ===================================================== */
+        @media (max-width: 480px) {
+            /* Container */
+            .container { padding: 0 4vw; }
+
+            /* Nav */
+            nav { gap: 14px; padding: 20px 0; }
+            .logo { font-size: 12px; letter-spacing: 1.5px; }
+            .nav-links { gap: 16px; }
+            .nav-links a { font-size: 12px; }
+
+            /* Hero */
+            .hero { padding: 6vh 0 5vh 0; }
+            .hero h1 { font-size: 2.2rem; letter-spacing: -0.02em; margin-bottom: 16px; }
+            .hero p { font-size: 0.95rem; }
+
+            /* Work */
+            .work-section { padding: 40px 0; }
+            .project-grid { gap: 40px; }
+            .section-title { margin-bottom: 36px; }
+            .project-title { font-size: 1.75rem; }
+            .project-description { font-size: 0.95rem; margin-bottom: 24px; }
+            .project-meta { flex-wrap: wrap; gap: 10px; }
+
+            /* Safarni phone mockup — never overflow tiny screens */
+            .project-image-wrapper > div[style*="280px"] {
+                width: 90% !important;
+                max-width: 280px !important;
+            }
+
+            /* About */
+            #about { padding: 40px 0 !important; }
+            #about h2 { font-size: 1.9rem !important; margin-bottom: 20px !important; }
+            #about p { font-size: 0.95rem !important; }
+
+            /* Footer */
+            footer { gap: 32px; padding: 40px 0 28px 0; }
+            .footer-cta h2 { font-size: 1.7rem; }
+            .footer-cta a { font-size: 0.9rem; }
+            footer .nav-links { flex-direction: column; gap: 12px; }
         }
     </style>
 </head>
@@ -344,7 +459,7 @@
                 <!-- Project 1: Binzoi -->
                 <article class="project-card">
                     <div class="project-image-wrapper" style="padding-bottom: 0; background: transparent;">
-                        <img src="assets/media_1787091109955.jpg" alt="Binzoi Splash" style="width: 100%; display: block; border-radius: 4px; border: 1px solid rgba(197, 160, 89, 0.2); filter: contrast(1.05) saturate(1.05);">
+                        <img src=".user_uploaded/media_1787091109955.jpg" alt="Binzoi Splash" style="width: 100%; display: block; border-radius: 4px; border: 1px solid rgba(197, 160, 89, 0.2); filter: contrast(1.05) saturate(1.05);">
                     </div>
                     <div class="project-info">
                         <div class="project-meta">
@@ -361,7 +476,7 @@
                 <article class="project-card">
                     <div class="project-image-wrapper" style="padding-bottom: 0; background: transparent; display: flex; justify-content: center; align-items: center; background: linear-gradient(135deg, #18202c 0%, #0e1218 100%); padding: 60px 0;">
                         <div style="width: 280px; border-radius: 40px; background: #000; padding: 10px; box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1);">
-                            <img src="assets/media_1787093164303.png" alt="Safarni Home Mockup" style="width: 100%; display: block; border-radius: 32px;">
+                            <img src=".user_uploaded/media_1787093164303.png" alt="Safarni Home Mockup" style="width: 100%; display: block; border-radius: 32px;">
                         </div>
                     </div>
                     <div class="project-info">
@@ -385,7 +500,7 @@
                                 <div style="width: 8px; height: 8px; border-radius: 50%; background: #ffbd2e;"></div>
                                 <div style="width: 8px; height: 8px; border-radius: 50%; background: #27c93f;"></div>
                             </div>
-                            <img src="assets/media_1787094061118.png" alt="Mithaq Homepage Mockup" style="width: 100%; display: block;">
+                            <img src=".user_uploaded/media_1787094061118.png" alt="Mithaq Homepage Mockup" style="width: 100%; display: block;">
                         </div>
                     </div>
                     <div class="project-info">
@@ -461,4 +576,3 @@
     </div>
 </body>
 </html>
-

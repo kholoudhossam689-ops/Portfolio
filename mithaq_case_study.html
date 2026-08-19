@@ -377,6 +377,71 @@
             background: #fff;
         }
 
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 1024px) {
+            .container, .container-narrow { padding: 0 40px; }
+            section { padding: 80px 0; }
+            .hero-content { padding-top: 120px; }
+            
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+            .problem-grid, .decisions-grid { grid-template-columns: 1fr; gap: 40px; }
+            .feature-split { grid-template-columns: 1fr; gap: 60px; }
+            .feature-split.reverse .feature-visual, .feature-split.reverse .feature-text { order: unset; }
+            
+            .final-composition { display: flex; flex-direction: column; gap: 40px; }
+        }
+        
+        @media (max-width: 768px) {
+            .container, .container-narrow { padding: 0 24px; }
+            section { padding: 60px 0; }
+            h2 { font-size: 2rem; }
+            
+            /* Fix Hero Browser Mockups */
+            .case-hero { height: auto; min-height: auto; padding-bottom: 80px; overflow: hidden; }
+            .hero-content { padding-top: 100px; padding-bottom: 60px; }
+            .hero-title { font-size: 3rem; }
+            .metadata-row { flex-direction: column; gap: 24px; }
+            
+            .hero-mockups {
+                position: relative;
+                height: auto;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 32px;
+                transform: none;
+            }
+            .hero-mockups .browser-mockup {
+                position: relative !important;
+                transform: none !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                left: 0 !important;
+                right: 0 !important;
+                top: 0 !important;
+                bottom: 0 !important;
+                margin: 0 !important;
+            }
+            .hero-mockups .browser-mockup:not(:first-child) {
+                display: none; /* Hide overlapping mockups on mobile to avoid extreme clutter */
+            }
+
+            .stats-grid { grid-template-columns: 1fr; }
+            
+            /* Dual mockups fix */
+            .dual-mockups { flex-direction: column; gap: 40px; }
+            .dual-mockups > * { max-width: 100% !important; }
+            
+            .browser-mockup { max-width: 100% !important; width: 100% !important; }
+            img { max-width: 100%; height: auto; width: 100%; object-fit: contain; }
+        }
+
+        @media (max-width: 480px) {
+            section { padding: 40px 0; }
+            .hero-title { font-size: 2.2rem; }
+            h2 { font-size: 1.6rem; }
+        }
     </style>
 </head>
 <body>
@@ -402,7 +467,7 @@
                     </div>
                     <div class="browser-content">
                         <!-- REPLACE SRC with actual mithaq-landing image -->
-                        <img src="assets/media_1787094061118.png" alt="Mithaq Landing Page" class="mock-img">
+                        <img src=".user_uploaded/media_1787094061118.png" alt="Mithaq Landing Page" class="mock-img">
                     </div>
                 </div>
                 
@@ -413,7 +478,7 @@
                     </div>
                     <div class="browser-content">
                         <!-- REPLACE SRC with actual mithaq-onboarding image -->
-                        <img src="assets/media_1787003858430.png" alt="Mithaq Onboarding" class="mock-img">
+                        <img src=".user_uploaded/media_1787003858430.png" alt="Mithaq Onboarding" class="mock-img">
                     </div>
                 </div>
 
@@ -424,7 +489,7 @@
                     </div>
                     <div class="browser-content">
                         <!-- REPLACE SRC with actual mithaq-dashboard image -->
-                        <img src="assets/media_1787091576962.png" alt="Mithaq Project Workspace" class="mock-img" style="min-height: 500px;">
+                        <img src=".user_uploaded/media_1787091576962.png" alt="Mithaq Project Workspace" class="mock-img" style="min-height: 500px;">
                     </div>
                 </div>
             </div>
@@ -499,7 +564,7 @@
                     </div>
                     <div class="browser-content">
                         <!-- REPLACE SRC -->
-                        <img src="assets/media_1787091576962.png" alt="Revenue Trajectory Dashboard" class="mock-img">
+                        <img src=".user_uploaded/media_1787091576962.png" alt="Revenue Trajectory Dashboard" class="mock-img">
                     </div>
                 </div>
             </div>
@@ -519,7 +584,7 @@
                 <div class="feature-visual browser-mockup">
                      <div class="browser-header"><div class="browser-dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div></div>
                     <!-- REPLACE SRC -->
-                    <img src="assets/media_1787091619126.png" alt="Flexible Plans Pricing" class="mock-img">
+                    <img src=".user_uploaded/media_1787091619126.png" alt="Flexible Plans Pricing" class="mock-img">
                 </div>
             </div>
         </div>
@@ -538,7 +603,7 @@
                 <div class="feature-visual browser-mockup">
                     <div class="browser-header"><div class="browser-dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div></div>
                     <!-- REPLACE SRC -->
-                    <img src="assets/media_1787003899841.png" alt="Smart Proposals Dashboard" class="mock-img">
+                    <img src=".user_uploaded/media_1787003899841.png" alt="Smart Proposals Dashboard" class="mock-img">
                 </div>
             </div>
         </div>
@@ -557,7 +622,7 @@
                 <div class="feature-visual browser-mockup">
                     <div class="browser-header"><div class="browser-dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div></div>
                     <!-- REPLACE SRC (Use Market Pulse portion or dashboard) -->
-                    <img src="assets/media_1787003911439.png" alt="Market Analytics" class="mock-img">
+                    <img src=".user_uploaded/media_1787003911439.png" alt="Market Analytics" class="mock-img">
                 </div>
             </div>
         </div>
@@ -576,7 +641,7 @@
                 <div class="browser-mockup">
                     <div class="browser-header"><div class="browser-dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div></div>
                     <!-- REPLACE SRC -->
-                    <img src="assets/media_1787091643671.png" alt="Talent Network Directory" class="mock-img">
+                    <img src=".user_uploaded/media_1787091643671.png" alt="Talent Network Directory" class="mock-img">
                 </div>
             </div>
         </div>
@@ -595,7 +660,7 @@
                 <div class="browser-mockup" style="margin-bottom: 60px;">
                     <div class="browser-header"><div class="browser-dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div></div>
                     <!-- REPLACE SRC -->
-                    <img src="assets/media_1787091660178.png" alt="Project Workspace Dashboard" class="mock-img">
+                    <img src=".user_uploaded/media_1787091660178.png" alt="Project Workspace Dashboard" class="mock-img">
                 </div>
 
                 <div class="decisions-grid" style="text-align: left;">
@@ -692,16 +757,16 @@
             
             <div class="final-composition">
                 <div class="final-mockup final-img-1">
-                    <img src="assets/media_1787091576962.png" alt="Mithaq Screen" class="mock-img">
+                    <img src=".user_uploaded/media_1787091576962.png" alt="Mithaq Screen" class="mock-img">
                 </div>
                 <div class="final-mockup final-img-2">
-                    <img src="assets/media_1787003858430.png" alt="Mithaq Screen" class="mock-img">
+                    <img src=".user_uploaded/media_1787003858430.png" alt="Mithaq Screen" class="mock-img">
                 </div>
                 <div class="final-mockup final-img-3">
-                    <img src="assets/media_1787091619126.png" alt="Mithaq Screen" class="mock-img">
+                    <img src=".user_uploaded/media_1787091619126.png" alt="Mithaq Screen" class="mock-img">
                 </div>
                 <div class="final-mockup final-img-4">
-                    <img src="assets/media_1787091643671.png" alt="Mithaq Screen" class="mock-img">
+                    <img src=".user_uploaded/media_1787091643671.png" alt="Mithaq Screen" class="mock-img">
                 </div>
             </div>
             
@@ -717,4 +782,3 @@
 
 </body>
 </html>
-
