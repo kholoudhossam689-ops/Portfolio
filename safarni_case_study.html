@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safarni — UI/UX Case Study</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --orange: #f97316;
+            --orange-light: #fff7ed;
+            --navy: #1e2a4a;
+            --text-main: #1a1a2e;
+            --text-muted: #64748b;
+            --bg-white: #ffffff;
+            --bg-off: #f8fafc;
+            --bg-warm: #fffbf7;
+            --border: #e2e8f0;
+            --font: 'Inter', sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font);
+            color: var(--text-main);
+            background: var(--bg-white);
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+        }
+
+        img { display: block; max-width: 100%; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+        .container-narrow { max-width: 760px; margin: 0 auto; padding: 0 48px; }
+
+        section { padding: 120px 0; }
+        section.bg-off { background: var(--bg-off); }
+        section.bg-warm { background: var(--bg-warm); }
+        section.bg-navy { background: var(--navy); }
+
+        /* Typography */
+        .label {
+            display: inline-block;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 16px;
+        }
+        h2 { font-size: 2.75rem; font-weight: 700; letter-spacing: -0.025em; line-height: 1.15; margin-bottom: 20px; }
+        h3 { font-size: 1.4rem; font-weight: 600; margin-bottom: 12px; }
+        p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.75; }
+        p:last-child { margin-bottom: 0; }
+
+        /* ─── PHONE FRAME ─── */
+        .phone {
+            position: relative;
+            width: 280px;
+            border-radius: 44px;
+            background: #1a1a1a;
+            padding: 12px;
+            box-shadow:
+                0 0 0 1px rgba(255,255,255,0.08),
+                0 30px 80px rgba(0,0,0,0.25),
+                0 10px 30px rgba(0,0,0,0.15);
+            flex-shrink: 0;
+        }
+        .phone.lg { width: 320px; }
+        .phone.sm { width: 230px; }
+
+        .phone-screen {
+            border-radius: 34px;
+            overflow: hidden;
+            background: #f8fafc;
+            display: block;
+            width: 100%;
+        }
+        .phone-screen img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Side button accents */
+        .phone::before {
+            content: '';
+            position: absolute;
+            right: -3px;
+            top: 80px;
+            width: 3px;
+            height: 50px;
+            background: #2a2a2a;
+            border-radius: 0 3px 3px 0;
+        }
+        .phone::after {
+            content: '';
+            position: absolute;
+            left: -3px;
+            top: 70px;
+            width: 3px;
+            height: 35px;
+            background: #2a2a2a;
+            border-radius: 3px 0 0 3px;
+            box-shadow: 0 50px 0 #2a2a2a;
+        }
+
+        /* ─── 1. HERO ─── */
+        .hero {
+            background: linear-gradient(170deg, var(--navy) 0%, #0f1729 100%);
+            padding: 140px 0 0 0;
+            overflow: hidden;
+        }
+
+        .hero-text {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .hero-wordmark {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            color: #ffffff;
+            line-height: 1.08;
+            margin-bottom: 24px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            color: rgba(255,255,255,0.55);
+            max-width: 560px;
+            margin: 0 auto 40px;
+            font-weight: 300;
+        }
+
+        .hero-tags {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .hero-tag {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: rgba(255,255,255,0.7);
+            padding: 8px 18px;
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* Hero Phone Composition */
+        .hero-phones {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: -20px;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .hero-phone-left {
+            transform: rotate(-6deg) translateX(30px) translateY(30px);
+            opacity: 0.85;
+            z-index: 1;
+        }
+        .hero-phone-center {
+            z-index: 3;
+            transform: translateY(0px);
+        }
+        .hero-phone-right {
+            transform: rotate(6deg) translateX(-30px) translateY(30px);
+            opacity: 0.85;
+            z-index: 1;
+        }
+
+        /* ─── 2. PROBLEM ─── */
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-top: 56px;
+        }
+
+        .problem-card {
+            padding: 32px;
+            background: var(--bg-white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+        }
+
+        .problem-card .icon {
+            font-size: 28px;
+            margin-bottom: 16px;
+        }
+
+        /* ─── 3. OPPORTUNITY ─── */
+        .opp-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-top: 56px;
+        }
+
+        .opp-card {
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .opp-card.local { background: var(--navy); color: white; }
+        .opp-card.local h3, .opp-card.local p { color: rgba(255,255,255,0.85); }
+        .opp-card.intl { background: var(--orange-light); }
+
+        /* ─── 4. SOLUTION FLOW ─── */
+        .flow-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            margin-top: 60px;
+            flex-wrap: wrap;
+        }
+
+        .flow-step-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .flow-bubble {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            text-align: center;
+            letter-spacing: 0.02em;
+            border: 2px solid var(--border);
+            background: var(--bg-white);
+            color: var(--text-main);
+            transition: all 0.2s;
+        }
+
+        .flow-bubble.active {
+            background: var(--orange);
+            border-color: var(--orange);
+            color: white;
+            box-shadow: 0 8px 24px rgba(249,115,22,0.3);
+        }
+
+        .flow-connector {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--border), var(--orange));
+            margin-bottom: 10px;
+        }
+
+        /* ─── FEATURE SECTIONS ─── */
+        .feature-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            align-items: center;
+        }
+
+        .feature-split.reverse .feature-phones { order: 1; }
+        .feature-split.reverse .feature-copy { order: 2; }
+
+        .feature-phones {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 24px;
+            position: relative;
+        }
+
+        /* ─── SECTION 8: ITINERARY SHOWCASE (crown jewel) ─── */
+        .itinerary-showcase {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 60px;
+        }
+
+        .itinerary-copy {
+            max-width: 440px;
+            padding-bottom: 60px;
+        }
+
+        /* ─── DESIGN DECISIONS ─── */
+        .decisions-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 64px;
+        }
+
+        .decision-card {
+            padding-top: 28px;
+            border-top: 2px solid var(--text-main);
+        }
+
+        /* ─── FINAL SHOWCASE ─── */
+        .final-showcase {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 20px;
+            flex-wrap: wrap;
+            padding: 80px 0 0;
+        }
+
+        .final-phone-1 { transform: rotate(-8deg) translateY(20px); }
+        .final-phone-2 { transform: rotate(-4deg) translateY(10px); }
+        .final-phone-3 { transform: translateY(0); z-index: 5; }
+        .final-phone-4 { transform: rotate(4deg) translateY(10px); }
+        .final-phone-5 { transform: rotate(8deg) translateY(20px); }
+
+        /* ─── REFLECTION ─── */
+        .reflection-inner {
+            max-width: 720px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .reflection-inner h2 { color: white; }
+        .reflection-inner p { color: rgba(255,255,255,0.6); font-size: 1.2rem; }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 900px) {
+            .feature-split, .opp-split, .problem-grid, .decisions-grid { grid-template-columns: 1fr; }
+            .feature-split.reverse .feature-phones, .feature-split.reverse .feature-copy { order: unset; }
+            .hero h1 { font-size: 3rem; }
+            h2 { font-size: 2rem; }
+            .itinerary-showcase { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- 1. HERO -->
+<!-- ═══════════════════════════════════════════════ -->
+<header class="hero">
+    <div class="container">
+        <div class="hero-text">
+            <div class="hero-wordmark">S A F A R N I</div>
+            <h1>Discover Egypt.<br>Plan it your way.</h1>
+            <p class="hero-subtitle">A travel discovery and trip-planning experience designed for Egypt — for locals and visitors alike.</p>
+            <div class="hero-tags">
+                <span class="hero-tag">UI/UX Design</span>
+                <span class="hero-tag">Flutter Development</span>
+                <span class="hero-tag">Dart</span>
+                <span class="hero-tag">Product Design</span>
+            </div>
+
+            <!-- Role & Tools metadata -->
+            <div style="display: flex; justify-content: center; gap: 48px; margin-top: 36px; flex-wrap: wrap;">
+                <div style="text-align: center;">
+                    <div style="font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 6px;">Role</div>
+                    <div style="font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.8);">UI/UX Designer &amp; Flutter Developer</div>
+                </div>
+                <div style="width: 1px; background: rgba(255,255,255,0.1);"></div>
+                <div style="text-align: center;">
+                    <div style="font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 6px;">Tools</div>
+                    <div style="font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.8);">Figma · Flutter · Dart</div>
+                </div>
+                <div style="width: 1px; background: rgba(255,255,255,0.1);"></div>
+                <div style="text-align: center;">
+                    <div style="font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 6px;">Platform</div>
+                    <div style="font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.8);">iOS · Android</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3 phones: Login, Home, Itinerary -->
+        <div class="hero-phones">
+            <div class="phone hero-phone-left">
+                <div class="phone-screen">
+                    <img src=".user_uploaded/media_1787008293678.png" alt="Safarni Login">
+                </div>
+            </div>
+            <div class="phone lg hero-phone-center">
+                <div class="phone-screen">
+                    <img src=".user_uploaded/media_1787093164303.png" alt="Safarni Home">
+                </div>
+            </div>
+            <div class="phone hero-phone-right">
+                <div class="phone-screen">
+                    <img src=".user_uploaded/media_1787008032748.png" alt="Safarni Itinerary">
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- 2. THE PROBLEM -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="bg-off">
+    <div class="container">
+        <span class="label">The Problem</span>
+        <h2>Discovery is scattered.<br>Planning feels like work.</h2>
+        <p style="max-width: 680px;">Travelers — both locals and international visitors — don't always need another booking platform. They often need a clearer way to discover, understand, and decide.</p>
+
+        <div class="problem-grid">
+            <div class="problem-card">
+                <div class="icon">🗺️</div>
+                <h3>Too many scattered options</h3>
+                <p>Travel information is spread across multiple sources with inconsistent quality, making it hard to confidently plan.</p>
+            </div>
+            <div class="problem-card">
+                <div class="icon">🔍</div>
+                <h3>Hard to discover beyond the obvious</h3>
+                <p>Famous tourist sites are easy to find. Hidden gems and less-documented destinations are not.</p>
+            </div>
+            <div class="problem-card">
+                <div class="icon">📍</div>
+                <h3>Lack of destination context</h3>
+                <p>Users need to understand what a place actually offers — its character, what's nearby, how long it's worth spending there.</p>
+            </div>
+            <div class="problem-card">
+                <div class="icon">📋</div>
+                <h3>The gap between browsing and planning</h3>
+                <p>Discovering an interesting destination and turning it into an organized trip are two different mental modes — most apps ignore this.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- 3. THE OPPORTUNITY -->
+<!-- ═══════════════════════════════════════════════ -->
+<section>
+    <div class="container">
+        <span class="label">The Opportunity</span>
+        <h2>One app, two types of travelers.</h2>
+        <p style="max-width: 680px;">Safarni was designed to serve different travel behaviors without forcing every user into the same rigid path.</p>
+
+        <div class="opp-split">
+            <div class="opp-card local">
+                <h3 style="color: var(--orange);">For Local Travelers</h3>
+                <p style="color: rgba(255,255,255,0.7);">Discover new places within Egypt and build organized trips easily. Safarni makes it simple to go from "I want to go somewhere" to a structured itinerary in minutes.</p>
+            </div>
+            <div class="opp-card intl">
+                <h3>For International Tourists</h3>
+                <p>Discover Egyptian destinations visually and geographically. Understand what each place offers, how destinations relate to each other, and build a trip when ready — without pressure to commit up front.</p>
+            </div>
+        </div>
+
+        <p style="margin-top: 40px; text-align: center; font-size: 1.15rem; color: var(--text-muted);">
+            <strong style="color: var(--text-main);">Browsing doesn't require commitment.</strong><br>
+            Safarni can work as a pure discovery companion, or become a planning tool when the user is ready.
+        </p>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- 4. THE SOLUTION FLOW -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="bg-off">
+    <div class="container" style="text-align: center;">
+        <span class="label">The Solution</span>
+        <h2>A clear path from discovery to experience.</h2>
+        <p style="max-width: 580px; margin: 0 auto;">The entire Safarni product is organized around one idea: make the journey from casual exploration to a planned trip feel natural, not forced.</p>
+
+        <div class="flow-row">
+            <div class="flow-step-block">
+                <div class="flow-bubble active">Discover</div>
+            </div>
+            <div class="flow-connector"></div>
+            <div class="flow-step-block">
+                <div class="flow-bubble">Explore</div>
+            </div>
+            <div class="flow-connector"></div>
+            <div class="flow-step-block">
+                <div class="flow-bubble">Plan</div>
+            </div>
+            <div class="flow-connector"></div>
+            <div class="flow-step-block">
+                <div class="flow-bubble">Experience</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- 5. DISCOVERY EXPERIENCE -->
+<!-- ═══════════════════════════════════════════════ -->
+<section>
+    <div class="container">
+        <div class="feature-split">
+            <div class="feature-copy">
+                <span class="label">Discovery Experience</span>
+                <h2>Where will you explore today?</h2>
+                <p>The home screen immediately communicates Safarni's core purpose. A personalized greeting, a prominent search bar, destination category filters, and a featured destination card give users multiple ways to start exploring.</p>
+                <p>Visual-first destination cards make it easy to be drawn in by a place before knowing anything about it — the natural way people discover where they want to go.</p>
+            </div>
+            <div class="feature-phones">
+                <div class="phone lg">
+                    <div class="phone-screen">
+                        <img src=".user_uploaded/media_1787093164303.png" alt="Safarni Home Screen">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- 6. DESTINATION EXPLORATION -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="bg-warm">
+    <div class="container">
+        <div class="feature-split reverse">
+            <div class="feature-phones">
+                <div class="phone lg">
+                    <div class="phone-screen">
+                        <img src=".user_uploaded/media_1787007997241.png" alt="Aswan Destination Detail">
+                    </div>
+                </div>
+            </div>
+            <div class="feature-copy">
+                <span class="label">Destination Exploration</span>
+                <h2>Understand a place before you visit.</h2>
+                <p>Each destination detail screen gives users a complete picture: a full-bleed hero photo, ratings, recommended visit duration, average temperature, a destination description, and a location map.</p>
+                <p>The "Start Planning" button appears only after all this context is provided — making the transition from exploration to commitment feel earned and natural, not rushed.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- 7. FROM DISCOVERY TO PLANNING -->
+<!-- ═══════════════════════════════════════════════ -->
+<section>
+    <div class="container">
+        <div class="feature-split">
+            <div class="feature-copy">
+                <span class="label">From Discovery to Planning</span>
+                <h2>Ready to go? Set it up in seconds.</h2>
+                <p>When a user decides to plan a trip, Safarni asks only the essential questions: When are you going? How many travelers? How many days? What's your budget style?</p>
+                <p>Three budget tiers — Budget, Moderate, and Luxury — give the planning engine a clear direction without overwhelming the user with pricing inputs. One tap on "Prepare My Itinerary" hands everything over to Safarni.</p>
+            </div>
+            <div class="feature-phones">
+                <div class="phone lg">
+                    <div class="phone-screen">
+                        <img src=".user_uploaded/media_1787008017538.png" alt="Safarni Trip Planner">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- 8. SMART TRIP PLANNING (Crown Jewel) -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="bg-off">
+    <div class="container">
+        <div class="itinerary-showcase">
+            <div class="phone lg" style="box-shadow: 0 50px 120px rgba(249,115,22,0.15), 0 20px 60px rgba(0,0,0,0.3);">
+                <div class="phone-screen">
+                    <img src=".user_uploaded/media_1787008032748.png" alt="Safarni Itinerary">
+                </div>
+            </div>
+            <div class="itinerary-copy">
+                <span class="label">Smart Trip Planning</span>
+                <h2>A day-by-day plan, without the spreadsheet.</h2>
+                <p>The itinerary screen is where Safarni's value becomes most visible. Activities are organized into a clear chronological timeline — each with a time, activity type, title, and short description.</p>
+                <p>The day-tabs at the top let users move between days effortlessly. "Your Pick" badges highlight recommended activities, giving users a sense of personalization without decision overload.</p>
+                <p>Two action buttons at the bottom — "Refine" and "Plan Another Trip" — ensure the user always has a clear next step, whether they want to edit or start fresh.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- MY TRIPS + PROFILE (supporting screens) -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="bg-warm">
+    <div class="container">
+        <div class="feature-split">
+            <div class="feature-phones" style="gap: 32px; align-items: flex-start;">
+                <div class="phone">
+                    <div class="phone-screen">
+                        <img src=".user_uploaded/media_1787008168207.png" alt="My Trips Screen">
+                    </div>
+                </div>
+                <div class="phone" style="margin-top: 40px;">
+                    <div class="phone-screen">
+                        <img src=".user_uploaded/media_1787008261300.png" alt="Safarni Profile">
+                    </div>
+                </div>
+            </div>
+            <div class="feature-copy">
+                <span class="label">Managing the Journey</span>
+                <h2>Track every trip, in one place.</h2>
+                <p>The My Trips screen organizes all travel into clear states — Upcoming, Ongoing, and Completed — with live trip cards that surface key details at a glance: destination, dates, and trip length.</p>
+                <p>The Profile screen keeps personal travel history visible and accessible. A concise stats row (Trips / Places / Memories) gives users a quick sense of their travel identity, while the Current Journey card surfaces active progress without navigating away.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- SPLASH SCREEN ANIMATION (Video) -->
+<!-- ═══════════════════════════════════════════════ -->
+<section>
+    <div class="container">
+        <div class="feature-split">
+            <div class="feature-copy">
+                <span class="label">Motion & Identity</span>
+                <h2>The First Impression</h2>
+                <p>The Safarni app opens with a cinematic splash screen. Using subtle motion, the app slowly reveals the depth of Egyptian architecture, setting a premium and immersive tone before the user even signs in.</p>
+                <p>This animation transitions seamlessly into the onboarding flow, maintaining the visual momentum and creating a sense of arrival rather than just opening an app.</p>
+            </div>
+            <div class="feature-phones">
+                <div class="phone lg" style="box-shadow: 0 40px 100px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.1);">
+                    <div class="phone-screen">
+                        <!-- Playable Video Embedded -->
+                        <video src=".user_uploaded/safarni_splash.mp4" autoplay loop muted playsinline style="width: 100%; display: block;"></video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- AUTHENTICATION (Sign Up + Login) -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="bg-off">
+    <div class="container">
+        <div class="feature-split reverse">
+            <div class="feature-phones" style="gap: 32px; align-items: flex-start;">
+                <div class="phone">
+                    <div class="phone-screen">
+                        <img src=".user_uploaded/media_1787093174907.png" alt="Safarni Sign Up">
+                    </div>
+                </div>
+                <div class="phone" style="margin-top: 40px;">
+                    <div class="phone-screen">
+                        <img src=".user_uploaded/media_1787008293678.png" alt="Safarni Login">
+                    </div>
+                </div>
+            </div>
+            <div class="feature-copy">
+                <span class="label">Onboarding Experience</span>
+                <h2>Your journey begins here.</h2>
+                <p>The authentication screens immediately establish the visual identity of Safarni. A full-bleed hero photo of a Nile sunset with a sailing felucca communicates the product's essence before the user types a single character.</p>
+                <p>The sliding bottom sheet keeps forms clean and contained, layered naturally over the destination imagery — a design choice that reinforces the feeling of entering a travel experience, not just another sign-up form.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- 9. UI/UX DESIGN DECISIONS -->
+<!-- ═══════════════════════════════════════════════ -->
+<section>
+    <div class="container">
+        <span class="label">Design Decisions</span>
+        <h2>Designing for discovery, not just transactions.</h2>
+        <p style="max-width: 700px;">Building a product that serves two distinct user behaviors — casual browsing and structured planning — required deliberate decisions at every level of the UI.</p>
+
+        <div class="decisions-grid">
+            <div class="decision-card">
+                <h3>Visual-First Discovery</h3>
+                <p>Destinations lead with full-bleed photography. Users are drawn to places visually before reading any text, matching natural travel exploration behavior.</p>
+            </div>
+            <div class="decision-card">
+                <h3>Clear Information Hierarchy</h3>
+                <p>Each screen presents the most important information first — destination name, key facts, then detailed content — so users never feel lost or overwhelmed.</p>
+            </div>
+            <div class="decision-card">
+                <h3>Consistent Card Patterns</h3>
+                <p>Cards, badges, and action buttons follow a strict visual system throughout the app, making every screen immediately familiar regardless of where the user is.</p>
+            </div>
+            <div class="decision-card">
+                <h3>Simple Navigation</h3>
+                <p>Three-tab bottom navigation (Home, Trips, Profile) covers the full product scope without complexity. Users always know where they are and how to get back.</p>
+            </div>
+            <div class="decision-card">
+                <h3>Discovery vs Planning Clarity</h3>
+                <p>The product clearly separates browsing from committing. "Start Planning" only appears after the user has absorbed destination context — intentional friction to improve decision quality.</p>
+            </div>
+            <div class="decision-card">
+                <h3>Itinerary Timeline Structure</h3>
+                <p>The day-by-day timeline uses time stamps, color-coded activity dots, and card types to help users scan a full itinerary at a glance without reading every detail.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- 10. FINAL PRODUCT SHOWCASE -->
+<!-- ═══════════════════════════════════════════════ -->
+<section style="background: var(--navy); overflow: hidden; padding-bottom: 0;">
+    <div class="container" style="text-align: center;">
+        <span class="label" style="color: var(--orange);">Final Product</span>
+        <h2 style="color: white;">The Safarni Experience</h2>
+        <p style="color: rgba(255,255,255,0.5); max-width: 580px; margin: 0 auto;">Every screen, part of one coherent mobile product.</p>
+    </div>
+
+    <div class="final-showcase">
+        <div class="phone sm final-phone-1">
+            <div class="phone-screen">
+                <img src=".user_uploaded/media_1787008293678.png" alt="Login">
+            </div>
+        </div>
+        <div class="phone sm final-phone-2">
+            <div class="phone-screen">
+                <img src=".user_uploaded/media_1787093174907.png" alt="Sign Up">
+            </div>
+        </div>
+        <div class="phone lg final-phone-3">
+            <div class="phone-screen">
+                <img src=".user_uploaded/media_1787093164303.png" alt="Home">
+            </div>
+        </div>
+        <div class="phone sm final-phone-4">
+            <div class="phone-screen">
+                <img src=".user_uploaded/media_1787008032748.png" alt="Itinerary">
+            </div>
+        </div>
+        <div class="phone sm final-phone-5">
+            <div class="phone-screen">
+                <img src=".user_uploaded/media_1787008168207.png" alt="My Trips">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- 11. REFLECTION -->
+<!-- ═══════════════════════════════════════════════ -->
+<section class="bg-navy">
+    <div class="container">
+        <div class="reflection-inner">
+            <span class="label">Reflection</span>
+            <h2>What I Learned</h2>
+            <p>Safarni challenged me to design for two distinct mindsets living inside the same product: the casual browser who just wants to explore, and the intentional planner who is ready to commit to a trip.</p>
+            <p>Balancing these two modes required thinking carefully about when to show friction, when to stay out of the user's way, and how to make the transition from exploration to planning feel completely natural.</p>
+            <p>Designing for Egypt as a destination also pushed me to create a visual language that feels warm, inviting, and culturally resonant — without turning the UI into a travel brochure.</p>
+            <p>Beyond design, I implemented the full mobile app interface using <strong style="color: rgba(255,255,255,0.85);">Flutter and Dart</strong> — translating every screen and interaction directly into working code. This end-to-end ownership of design and implementation gave me a much deeper appreciation for how design decisions affect real-world development constraints, and vice versa.</p>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
