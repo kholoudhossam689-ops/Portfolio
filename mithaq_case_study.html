@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mithaq - UI/UX Case Study</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Mithaq SaaS Palette */
+            --bg-white: #ffffff;
+            --bg-off-white: #f8fafc; /* Very subtle blue-gray tint for sections */
+            --text-main: #0f172a; /* Deep Navy */
+            --text-muted: #64748b;
+            --accent-blue: #2563eb;
+            --border-light: #e2e8f0;
+            
+            --font-main: 'Inter', sans-serif;
+            
+            /* Shadows for Mockups */
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+            --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            --shadow-float: 0 30px 60px -15px rgba(0, 0, 0, 0.2);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--text-main);
+            background-color: var(--bg-white);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+            height: auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+        
+        .container-narrow {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        section {
+            padding: 120px 0;
+        }
+
+        section.bg-gray {
+            background-color: var(--bg-off-white);
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 24px;
+        }
+
+        .section-label {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-blue);
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        p {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+        }
+
+        /* SaaS Browser Mockup Frame */
+        .browser-mockup {
+            background: #ffffff;
+            border-radius: 12px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-xl);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .browser-header {
+            height: 40px;
+            background: #f1f5f9;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            gap: 8px;
+        }
+
+        .browser-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        .dot.red { background-color: #ff5f56; }
+        .dot.yellow { background-color: #ffbd2e; }
+        .dot.green { background-color: #27c93f; }
+
+        .browser-content {
+            flex: 1;
+            background: #fff;
+            position: relative;
+        }
+
+        /* Image Placeholder Style (To be replaced by actual src) */
+        .mock-img {
+            width: 100%;
+            height: auto;
+            background: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+            font-size: 0.875rem;
+            min-height: 400px;
+        }
+
+        /* 1. HERO SECTION */
+        .hero {
+            padding: 160px 0 100px;
+            text-align: center;
+            background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            margin-bottom: 24px;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 32px;
+        }
+
+        .hero .metadata {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 80px;
+        }
+
+        .meta-tag {
+            background: #fff;
+            border: 1px solid var(--border-light);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-main);
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Hero Composition */
+        .hero-composition {
+            position: relative;
+            max-width: 1100px;
+            margin: 0 auto;
+            height: 600px;
+        }
+
+        .hero-main-screen {
+            position: absolute;
+            top: 0;
+            left: 10%;
+            width: 80%;
+            z-index: 2;
+        }
+
+        .hero-bg-screen {
+            position: absolute;
+            top: 100px;
+            right: 0%;
+            width: 70%;
+            z-index: 1;
+            opacity: 0.9;
+            transform: scale(0.95);
+            box-shadow: var(--shadow-float);
+        }
+        
+        .hero-bg-screen-2 {
+            position: absolute;
+            top: 150px;
+            left: 0%;
+            width: 60%;
+            z-index: 3;
+            transform: scale(0.9);
+            box-shadow: var(--shadow-float);
+        }
+
+        /* 2 & 3. PROBLEM & IDEA */
+        .dual-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .problem-card {
+            background: var(--bg-off-white);
+            padding: 40px;
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+        }
+
+        .problem-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+            color: var(--text-main);
+        }
+
+        .big-idea {
+            font-size: 2rem;
+            line-height: 1.4;
+            color: var(--text-main);
+            font-weight: 500;
+            margin: 60px 0;
+            text-align: center;
+        }
+
+        /* 4. SOLUTION OVERVIEW FLOW */
+        .flow-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            padding: 40px;
+            border-radius: 100px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm);
+            margin: 60px 0;
+            overflow-x: auto;
+        }
+
+        .flow-step {
+            font-weight: 600;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            white-space: nowrap;
+        }
+
+        .flow-arrow {
+            color: var(--accent-blue);
+            font-weight: bold;
+        }
+
+        /* FEATURE SECTIONS (Alternating Layout) */
+        .feature-row {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 80px;
+            align-items: center;
+            margin-bottom: 120px;
+        }
+        
+        .feature-row.reverse {
+            grid-template-columns: 1.2fr 1fr;
+        }
+        
+        .feature-row.reverse .feature-text {
+            order: 2;
+        }
+        .feature-row.reverse .feature-visual {
+            order: 1;
+        }
+
+        /* Full Width Feature */
+        .feature-full {
+            text-align: center;
+            margin-bottom: 120px;
+        }
+        .feature-full .feature-text {
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+
+        /* 14. USER FLOWS */
+        .user-flows {
+            display: grid;
+            gap: 40px;
+        }
+        
+        .flow-track {
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .flow-track h4 {
+            margin-bottom: 24px;
+            color: var(--accent-blue);
+        }
+        
+        .flow-nodes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .flow-node {
+            background: var(--bg-off-white);
+            padding: 12px 20px;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border: 1px solid var(--border-light);
+        }
+
+        /* 15. DESIGN DECISIONS */
+        .decisions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+        
+        .decision-card {
+            padding: 32px;
+            border-top: 2px solid var(--text-main);
+        }
+
+        /* 17. FINAL PRODUCT (Masonry/Grid Composition) */
+        .final-composition {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+            margin-top: 60px;
+        }
+        
+        .final-img-1 { grid-column: 1 / 9; }
+        .final-img-2 { grid-column: 9 / 13; }
+        .final-img-3 { grid-column: 1 / 5; }
+        .final-img-4 { grid-column: 5 / 13; }
+        
+        .final-mockup {
+            border-radius: 8px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-light);
+            overflow: hidden;
+            background: #fff;
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 1024px) {
+            .container, .container-narrow { padding: 0 40px; }
+            section { padding: 80px 0; }
+            .hero-content { padding-top: 120px; }
+            
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+            .problem-grid, .decisions-grid { grid-template-columns: 1fr; gap: 40px; }
+            .feature-split { grid-template-columns: 1fr; gap: 60px; }
+            .feature-split.reverse .feature-visual, .feature-split.reverse .feature-text { order: unset; }
+            
+            .final-composition { display: flex; flex-direction: column; gap: 40px; }
+        }
+        
+        @media (max-width: 768px) {
+            .container, .container-narrow { padding: 0 24px; }
+            section { padding: 60px 0; }
+            h2 { font-size: 2rem; }
+            
+            /* Fix Hero Browser Mockups */
+            .case-hero { height: auto; min-height: auto; padding-bottom: 80px; overflow: hidden; }
+            .hero-content { padding-top: 100px; padding-bottom: 60px; }
+            .hero-title { font-size: 3rem; }
+            .metadata-row { flex-direction: column; gap: 24px; }
+            
+            .hero-mockups {
+                position: relative;
+                height: auto;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 32px;
+                transform: none;
+            }
+            .hero-mockups .browser-mockup {
+                position: relative !important;
+                transform: none !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                left: 0 !important;
+                right: 0 !important;
+                top: 0 !important;
+                bottom: 0 !important;
+                margin: 0 !important;
+            }
+            .hero-mockups .browser-mockup:not(:first-child) {
+                display: none; /* Hide overlapping mockups on mobile to avoid extreme clutter */
+            }
+
+            .stats-grid { grid-template-columns: 1fr; }
+            
+            /* Dual mockups fix */
+            .dual-mockups { flex-direction: column; gap: 40px; }
+            .dual-mockups > * { max-width: 100% !important; }
+            
+            .browser-mockup { max-width: 100% !important; width: 100% !important; }
+            img { max-width: 100%; height: auto; width: 100%; object-fit: contain; }
+        }
+
+        @media (max-width: 480px) {
+            section { padding: 40px 0; }
+            .hero-title { font-size: 2.2rem; }
+            h2 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. HERO -->
+    <header class="hero">
+        <div class="container">
+            <h1>Mithaq</h1>
+            <p class="subtitle">Making freelance pricing and client–freelancer decisions more transparent.</p>
+            
+            <div class="metadata">
+                <span class="meta-tag">UI/UX Design</span>
+                <span class="meta-tag">Web Development</span>
+                <span class="meta-tag">ASP.NET MVC</span>
+            </div>
+            
+            <!-- Premium Overlapping Browser Composition -->
+            <div class="hero-composition">
+                <!-- Back right: Landing Page -->
+                <div class="browser-mockup hero-bg-screen">
+                    <div class="browser-header">
+                        <div class="browser-dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+                    </div>
+                    <div class="browser-content">
+                        <!-- REPLACE SRC with actual mithaq-landing image -->
+                        <img src="assets/media_1787094061118.png" alt="Mithaq Landing Page" class="mock-img">
+                    </div>
+                </div>
+                
+                <!-- Back left: Onboarding -->
+                <div class="browser-mockup hero-bg-screen-2">
+                    <div class="browser-header">
+                        <div class="browser-dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+                    </div>
+                    <div class="browser-content">
+                        <!-- REPLACE SRC with actual mithaq-onboarding image -->
+                        <img src="assets/media_1787003858430.png" alt="Mithaq Onboarding" class="mock-img">
+                    </div>
+                </div>
+
+                <!-- Center Main: Dashboard/Workspace -->
+                <div class="browser-mockup hero-main-screen">
+                    <div class="browser-header">
+                        <div class="browser-dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+                    </div>
+                    <div class="browser-content">
+                        <!-- REPLACE SRC with actual mithaq-dashboard image -->
+                        <img src="assets/media_1787091576962.png" alt="Mithaq Project Workspace" class="mock-img" style="min-height: 500px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2 & 3. THE PROBLEM & IDEA -->
+    <section class="bg-gray">
+        <div class="container">
+            <span class="section-label">The Problem</span>
+            <h2>A Lack of Transparency</h2>
+            <p style="margin-bottom: 48px;">The broader problem is a lack of transparency between the two sides: What is a fair price? Who is the right freelancer? How can both sides make a confident decision?</p>
+            
+            <div class="dual-column">
+                <div class="problem-card">
+                    <h3>For Freelancers</h3>
+                    <p>Freelancers often struggle to determine a fair price for their work. Pricing too low can undervalue their skills, while pricing too high can make their service less competitive.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>For Clients</h3>
+                    <p>Clients often struggle to understand what a realistic budget should be when looking for freelance services. They also need a way to compare freelancers beyond price alone.</p>
+                </div>
+            </div>
+            
+            <div class="big-idea">
+                "What if a freelance platform could make pricing and decision-making more transparent for both sides?"
+            </div>
+            
+            <div class="container-narrow text-center">
+                <p>Mithaq was designed around this idea. Instead of leaving freelancers to guess their prices and clients to guess whether a quote is reasonable, the platform introduces structured pricing, comparison, AI-assisted evaluation, and trust signals into the workflow.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. SOLUTION OVERVIEW -->
+    <section>
+        <div class="container">
+            <span class="section-label">Solution Overview</span>
+            <h2>Connecting the Ecosystem</h2>
+            <p>Mithaq addresses the problem through several connected product solutions forming a complete workflow.</p>
+            
+            <div class="flow-diagram">
+                <div class="flow-step">Freelancer</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">Price</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">Service</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">Client</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">Evaluation</div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-step">Trust</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. AI PRICING ENGINE -->
+    <section class="bg-gray">
+        <div class="container">
+            <div class="feature-full">
+                <div class="feature-text">
+                    <span class="section-label">Helping Freelancers Price Their Work</span>
+                    <h2>AI Pricing Engine</h2>
+                    <p><strong>Problem:</strong> Freelancers need guidance when deciding what to charge for a project.</p>
+                    <p><strong>Solution:</strong> Mithaq calculates a recommended project price based on relevant factors such as freelancer experience, certifications, project complexity, estimated effort, urgency, demand, and market benchmarks. The goal is not to replace judgment, but to provide a more informed starting point.</p>
+                </div>
+                
+                <div class="browser-mockup">
+                    <div class="browser-header">
+                        <div class="browser-dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div>
+                    </div>
+                    <div class="browser-content">
+                        <!-- REPLACE SRC -->
+                        <img src="assets/media_1787091576962.png" alt="Revenue Trajectory Dashboard" class="mock-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. SERVICE PRICE DISTRIBUTION -->
+    <section>
+        <div class="container">
+            <div class="feature-row">
+                <div class="feature-text">
+                    <span class="section-label">Giving Clients a Clearer Budget</span>
+                    <h2>Service Pricing Distribution</h2>
+                    <p><strong>Problem:</strong> Clients may not know what a realistic budget is for a particular service.</p>
+                    <p><strong>Solution:</strong> Mithaq presents a market-based price range using a structured Budget → Standard → Premium tiering. This gives clients a clearer understanding of the pricing landscape before choosing a service or freelancer.</p>
+                </div>
+                <div class="feature-visual browser-mockup">
+                     <div class="browser-header"><div class="browser-dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div></div>
+                    <!-- REPLACE SRC -->
+                    <img src="assets/media_1787091619126.png" alt="Flexible Plans Pricing" class="mock-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. QUOTE COMPARISON -->
+    <section class="bg-gray">
+        <div class="container">
+            <div class="feature-row reverse">
+                <div class="feature-text">
+                    <span class="section-label">Comparing Proposals Beyond Price</span>
+                    <h2>Quote Comparison</h2>
+                    <p><strong>Problem:</strong> Clients may receive multiple proposals, but price alone is not enough to make a confident decision.</p>
+                    <p><strong>Solution:</strong> Mithaq allows clients to compare proposals using holistic factors such as price, delivery time, freelancer experience, and AI evaluation, streamlining the decision-making pipeline.</p>
+                </div>
+                <div class="feature-visual browser-mockup">
+                    <div class="browser-header"><div class="browser-dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div></div>
+                    <!-- REPLACE SRC -->
+                    <img src="assets/media_1787003899841.png" alt="Smart Proposals Dashboard" class="mock-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. MARKET ANALYTICS -->
+    <section>
+        <div class="container">
+            <div class="feature-row">
+                <div class="feature-text">
+                    <span class="section-label">Understanding the Market</span>
+                    <h2>AI Market Analytics</h2>
+                    <p><strong>Problem:</strong> Freelancers and clients can make pricing decisions without a clear view of current market conditions.</p>
+                    <p><strong>Solution:</strong> Mithaq provides category-specific insights (demand levels, average hourly rates, pricing benchmarks, market trends) to support decision-making processes.</p>
+                </div>
+                <div class="feature-visual browser-mockup">
+                    <div class="browser-header"><div class="browser-dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div></div>
+                    <!-- REPLACE SRC (Use Market Pulse portion or dashboard) -->
+                    <img src="assets/media_1787003911439.png" alt="Market Analytics" class="mock-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 12. TALENT NETWORK -->
+    <section class="bg-gray">
+        <div class="container">
+            <div class="feature-full">
+                <div class="feature-text">
+                    <span class="section-label">Helping Clients Discover Talent</span>
+                    <h2>Talent Network</h2>
+                    <p><strong>Problem:</strong> Clients need ways to discover suitable freelancers beyond simply receiving proposal lists.</p>
+                    <p><strong>Solution:</strong> Clients can explore freelancer skills, experience, and external portfolios via a dedicated talent network to make more informed hiring decisions.</p>
+                </div>
+                <div class="browser-mockup">
+                    <div class="browser-header"><div class="browser-dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div></div>
+                    <!-- REPLACE SRC -->
+                    <img src="assets/media_1787091643671.png" alt="Talent Network Directory" class="mock-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9, 10, 11, 13. PROJECT WORKSPACE (Trust, Escrow, Chat, Feedback) -->
+    <section>
+        <div class="container">
+            <div class="feature-full">
+                <div class="feature-text">
+                    <span class="section-label">The Core Workflow</span>
+                    <h2>Project Workspace</h2>
+                    <p>Mithaq structures the active project phase to reduce risk and maintain context.</p>
+                </div>
+                
+                <div class="browser-mockup" style="margin-bottom: 60px;">
+                    <div class="browser-header"><div class="browser-dots"><div class="dot red"></div><div class="dot yellow"></div><div class="dot green"></div></div></div>
+                    <!-- REPLACE SRC -->
+                    <img src="assets/media_1787091660178.png" alt="Project Workspace Dashboard" class="mock-img">
+                </div>
+
+                <div class="decisions-grid" style="text-align: left;">
+                    <div>
+                        <h4>Escrow Payment Flow</h4>
+                        <p>Mithaq structures project payments around approved milestones, helping reduce uncertainty between both sides before funds are released.</p>
+                    </div>
+                    <div>
+                        <h4>Built-in Chat</h4>
+                        <p>Keeps project-related communication connected to the workflow so important discussions remain associated with the project.</p>
+                    </div>
+                    <div>
+                        <h4>Building Trust</h4>
+                        <p>A feedback loop where freelancers build reviews, ratings, and reputation, ensuring both sides contribute to the platform's ecosystem.</p>
+                    </div>
+                    <div>
+                        <h4>Client Feedback</h4>
+                        <p>Users can provide feedback about their experience with the platform, creating a loop that informs future product improvements.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 14. USER FLOWS -->
+    <section class="bg-gray">
+        <div class="container">
+            <span class="section-label">Journey Mapping</span>
+            <h2>User Flows</h2>
+            <p style="margin-bottom: 40px;">Two distinct but connected experiences.</p>
+            
+            <div class="user-flows">
+                <div class="flow-track">
+                    <h4>Freelancer Flow</h4>
+                    <div class="flow-nodes">
+                        <div class="flow-node">Create Profile</div> →
+                        <div class="flow-node">Define Service</div> →
+                        <div class="flow-node">Get Pricing Guidance</div> →
+                        <div class="flow-node">Publish / Offer Service</div> →
+                        <div class="flow-node">Work With Client</div> →
+                        <div class="flow-node">Build Reputation</div>
+                    </div>
+                </div>
+                
+                <div class="flow-track">
+                    <h4>Client Flow</h4>
+                    <div class="flow-nodes">
+                        <div class="flow-node">Discover Service</div> →
+                        <div class="flow-node">Understand Price Range</div> →
+                        <div class="flow-node">Explore Freelancers</div> →
+                        <div class="flow-node">Compare Proposals</div> →
+                        <div class="flow-node">Communicate</div> →
+                        <div class="flow-node">Complete Project</div> →
+                        <div class="flow-node">Evaluate</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 15. UI/UX DESIGN DECISIONS -->
+    <section>
+        <div class="container">
+            <span class="section-label">Designing a Complex Two-Sided Platform</span>
+            <h2>UI/UX Design Decisions</h2>
+            <p style="margin-bottom: 60px; max-width: 800px;">One of the main challenges was presenting a large number of features without overwhelming the user.</p>
+            
+            <div class="decisions-grid">
+                <div class="decision-card">
+                    <h3>Information Hierarchy</h3>
+                    <p>Organizing pricing, freelancer information, proposals, and project details so users can scan and compare information quickly.</p>
+                </div>
+                <div class="decision-card">
+                    <h3>Trust & Transparency</h3>
+                    <p>Making pricing, experience, reviews, and other decision-making information visible at the right moments in the user journey.</p>
+                </div>
+                <div class="decision-card">
+                    <h3>Role-Based Experiences</h3>
+                    <p>Designing different experiences for freelancers and clients while keeping the overall product visually consistent.</p>
+                </div>
+                <div class="decision-card">
+                    <h3>Reusable UI Patterns</h3>
+                    <p>Using consistent cards, buttons, navigation, forms, tables, badges, and information blocks throughout the platform for scalability.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 17. FINAL PRODUCT & 18. REFLECTION -->
+    <section class="bg-gray">
+        <div class="container">
+            <span class="section-label">The Mithaq Experience</span>
+            <h2>Final Product Showcase</h2>
+            
+            <div class="final-composition">
+                <div class="final-mockup final-img-1">
+                    <img src="assets/media_1787091576962.png" alt="Mithaq Screen" class="mock-img">
+                </div>
+                <div class="final-mockup final-img-2">
+                    <img src="assets/media_1787003858430.png" alt="Mithaq Screen" class="mock-img">
+                </div>
+                <div class="final-mockup final-img-3">
+                    <img src="assets/media_1787091619126.png" alt="Mithaq Screen" class="mock-img">
+                </div>
+                <div class="final-mockup final-img-4">
+                    <img src="assets/media_1787091643671.png" alt="Mithaq Screen" class="mock-img">
+                </div>
+            </div>
+            
+            <div class="container-narrow" style="margin-top: 120px; text-align: center;">
+                <span class="section-label">Reflection</span>
+                <h2>What I Learned</h2>
+                <p style="font-size: 1.25rem;">Mithaq challenged me to think beyond individual screens and design a complete product experience for two different user roles.</p>
+                <p>I learned how to organize complex information, design decision-making flows, and balance functionality with clarity across a web platform.</p>
+                <p>The project also helped me understand how AI-assisted features can be incorporated into a product experience without making the interface feel unnecessarily complicated.</p>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
+
