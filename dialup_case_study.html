@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DIALUP — A Call From the 90s | Case Study</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #EAE6DF;
+    --dark: #1A1A18;
+    --red: #C8331A;
+    --mid: #4A4A48;
+    --light-line: rgba(26,26,24,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--dark);
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ─── UTILITIES ─── */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  .label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--red);
+  }
+
+  .mono {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  img { display: block; max-width: 100%; height: auto; }
+
+  /* ─── NAV ─── */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(234, 230, 223, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--light-line);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    text-decoration: none;
+    color: var(--dark);
+  }
+
+  .nav-logo span { color: var(--red); font-style: italic; }
+
+  .nav-back {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-back:hover { color: var(--dark); }
+
+  /* ─── COVER ─── */
+  .cover {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .cover-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    opacity: 1;
+  }
+
+  .cover-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0) 50%,
+      rgba(0,0,0,0.6) 80%,
+      rgba(0,0,0,0.9) 100%
+    );
+  }
+
+  .cover-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 72px 80px;
+  }
+
+  .cover-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 20px;
+  }
+
+  .cover-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(72px, 10vw, 130px);
+    font-weight: 900;
+    color: #fff;
+    line-height: 0.95;
+    letter-spacing: -3px;
+    margin-bottom: 24px;
+  }
+
+  .cover-title .script {
+    font-style: italic;
+    color: var(--red);
+  }
+
+  .cover-tagline {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+  }
+
+  /* ─── OVERVIEW ─── */
+  .overview {
+    padding: 120px 0;
+    border-bottom: 1px solid var(--light-line);
+  }
+
+  .overview-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .overview-intro {
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: -0.02em;
+    color: var(--dark);
+  }
+
+  .overview-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding-top: 8px;
+  }
+
+  .meta-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--light-line);
+  }
+
+  .meta-row:first-child { border-top: 1px solid var(--light-line); }
+
+  .meta-key {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  .meta-val {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--dark);
+    text-align: right;
+  }
+
+  /* ─── SECTION STRUCTURE ─── */
+  .section {
+    padding: 120px 0;
+    border-bottom: 1px solid var(--light-line);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 72px;
+  }
+
+  .section-num {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 700;
+    line-height: 1.0;
+    letter-spacing: -1.5px;
+    color: var(--dark);
+    max-width: 600px;
+  }
+
+  .section-body {
+    font-size: 1.05rem;
+    font-weight: 400;
+    line-height: 1.8;
+    color: var(--dark);
+    max-width: 600px;
+  }
+
+  .section-body p + p { margin-top: 20px; }
+
+  /* ─── STATEMENT TEXT ─── */
+  .statement {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: -1px;
+    color: var(--dark);
+    max-width: 820px;
+  }
+
+  .statement em { font-style: italic; color: var(--red); }
+
+  /* ─── TWO COLUMN ─── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .three-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 32px;
+  }
+
+  /* ─── IMAGES ─── */
+  .img-full {
+    width: 100%;
+    border-radius: 4px;
+  }
+
+  .img-caption {
+    margin-top: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  .img-group {
+    display: grid;
+    gap: 24px;
+  }
+
+  .img-group.two { grid-template-columns: 1fr 1fr; }
+  .img-group.three { grid-template-columns: 1fr 1fr 1fr; }
+
+  /* Mobile / narrow screens use natural sizing */
+  .img-narrow {
+    max-width: 380px;
+    margin: 0 auto;
+  }
+
+  /* ─── DESIGN DIRECTION ─── */
+  .color-swatches {
+    display: flex;
+    gap: 16px;
+    margin-top: 40px;
+  }
+
+  .swatch {
+    flex: 1;
+    height: 80px;
+    border-radius: 4px;
+  }
+
+  .swatch-label {
+    margin-top: 10px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--mid);
+  }
+
+  /* ─── CHALLENGE BLOCKS ─── */
+  .challenge-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 48px;
+  }
+
+  .challenge-item {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 24px;
+    align-items: start;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--light-line);
+  }
+
+  .challenge-item:first-child { border-top: 1px solid var(--light-line); }
+
+  .challenge-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--red);
+    padding-top: 2px;
+  }
+
+  .challenge-text h4 {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -0.2px;
+    color: var(--dark);
+    margin-bottom: 8px;
+  }
+
+  .challenge-text p {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--dark);
+  }
+
+  /* ─── REFLECTION ─── */
+  .reflection-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin-top: 72px;
+  }
+
+  .reflection-item {
+    padding: 40px;
+    border: 1px solid var(--light-line);
+    border-radius: 4px;
+  }
+
+  .reflection-item .label { margin-bottom: 16px; }
+
+  .reflection-item p {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--dark);
+  }
+
+  /* ─── FINAL ─── */
+  .final {
+    min-height: 60vh;
+    background: var(--dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 48px;
+  }
+
+  .final-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(64px, 10vw, 120px);
+    font-weight: 900;
+    color: #fff;
+    line-height: 0.9;
+    letter-spacing: -3px;
+    margin-bottom: 24px;
+  }
+
+  .final-title span { color: var(--red); font-style: italic; }
+
+  .final-sub {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 60px;
+  }
+
+  .final-links {
+    display: flex;
+    gap: 32px;
+  }
+
+  .final-link {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    transition: color 0.2s;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    padding-bottom: 4px;
+  }
+
+  .final-link:hover { color: #fff; border-color: #fff; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .nav { padding: 16px 24px; }
+    .cover-content { padding: 0 32px 60px; }
+    .container { padding: 0 24px; }
+    .overview-grid { grid-template-columns: 1fr; gap: 48px; }
+    .two-col { grid-template-columns: 1fr; gap: 40px; }
+    .three-col { grid-template-columns: 1fr; gap: 32px; }
+    .img-group.two, .img-group.three { grid-template-columns: 1fr; }
+    .reflection-grid { grid-template-columns: 1fr; }
+    .section { padding: 72px 0; }
+    .overview { padding: 80px 0; }
+    .section-header { flex-direction: column; gap: 16px; }
+  }
+
+  @media (max-width: 600px) {
+    .cover-title { font-size: 56px; letter-spacing: -2px; }
+    .statement { font-size: 24px; }
+    .color-swatches { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="./portfolio.html" class="nav-logo">DIAL<span>up</span></a>
+  <a href="./portfolio.html" class="nav-back">← Back to Portfolio</a>
+</nav>
+
+<!-- ═══════════════════════════════════════
+     01 — COVER
+════════════════════════════════════════ -->
+<section class="cover">
+  <img
+    class="cover-img"
+    src=".user_uploaded/media_1789682486460.png"
+    alt="DIALUP Homepage Hero — A Call From the 90s"
+  >
+  <div class="cover-overlay"></div>
+  <div class="cover-content">
+    <div class="cover-label">Fashion E-Commerce · Brand Experience</div>
+    <h1 class="cover-title">DIAL<span class="script">up</span></h1>
+    <div class="cover-tagline">A Call From the 90s.</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     02 — PROJECT OVERVIEW
+════════════════════════════════════════ -->
+<section class="overview">
+  <div class="container">
+    <div class="overview-grid">
+      <div>
+        <div class="label" style="margin-bottom: 24px;">Project Overview</div>
+        <p class="overview-intro">
+          DIALUP is a fictional fashion e-commerce brand built around one question:
+          what would it feel like if a fashion brand from 1998 came back online today?
+        </p>
+      </div>
+      <div class="overview-meta">
+        <div class="meta-row">
+          <span class="meta-key">Role</span>
+          <span class="meta-val">Solo Designer & Developer</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-key">Type</span>
+          <span class="meta-val">Fashion E-Commerce Concept</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-key">Tools</span>
+          <span class="meta-val">Figma · React</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-key">Platform</span>
+          <span class="meta-val">Web · Responsive</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-key">Timeline</span>
+          <span class="meta-val">3 Weeks</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     03 — THE IDEA
+════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">03 / The Idea</span>
+    </div>
+
+    <p class="statement">
+      "The brand is <em>minimal.</em><br>The world around it is nostalgic."
+    </p>
+
+    <div class="two-col" style="margin-top: 72px;">
+      <div class="section-body">
+        <p>
+          The goal was never to recreate a literal 90s website. That would be a costume,
+          not a concept. Instead, DIALUP set out to combine a clean, contemporary
+          e-commerce structure with late-90s fashion editorial art direction, early-internet
+          visual language, and analog atmosphere.
+        </p>
+        <p>
+          The result should feel like a modern fashion brand that somehow came back online
+          from 1998 — unfamiliar enough to stop the scroll, intuitive enough to shop without thinking.
+        </p>
+      </div>
+      <div class="section-body">
+        <p>
+          The target audience is Gen Z — primarily US and UK fashion shoppers aged 16–26.
+          A generation that didn't live the 90s but romanticises them deeply. They recognise
+          the references without needing a tutorial.
+        </p>
+        <p>
+          DIALUP speaks to that tension: the new discovering the old, filtered through a
+          contemporary lens.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     04 — DESIGN DIRECTION
+════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">04 / Design Direction</span>
+      <h2 class="section-title">The visual system.</h2>
+    </div>
+
+    <div class="two-col" style="margin-bottom: 80px;">
+      <div class="section-body">
+        <p>
+          The palette starts with warm cream and deep dark — a classic fashion editorial
+          combination that keeps the product photography central. Then a single, sharp red
+          accent cuts through everything. Archive numbers. Callouts. Labels. Links.
+        </p>
+        <p>
+          Typography is restrained: a large-bodied serif for editorial moments and a clean
+          sans-serif for all functional elements. Nothing decorative. Nothing that competes
+          with the clothing.
+        </p>
+      </div>
+      <div class="section-body">
+        <p>
+          Visual references came from late-90s fashion catalogues, early internet archive
+          conventions, and CRT analog atmosphere. The aim was always specificity — not
+          generic retro, not Y2K, not cyberpunk. Specifically late-90s early-internet fashion.
+        </p>
+        <p>
+          Every screen was art-directed to feel like a page from a found magazine rather
+          than a component from a UI library.
+        </p>
+      </div>
+    </div>
+
+    <div class="color-swatches">
+      <div>
+        <div class="swatch" style="background: #EAE6DF; border: 1px solid rgba(0,0,0,0.08);"></div>
+        <div class="swatch-label">Warm Cream<br>#EAE6DF</div>
+      </div>
+      <div>
+        <div class="swatch" style="background: #1A1A18;"></div>
+        <div class="swatch-label">Deep Dark<br>#1A1A18</div>
+      </div>
+      <div>
+        <div class="swatch" style="background: #C8331A;"></div>
+        <div class="swatch-label">Signal Red<br>#C8331A</div>
+      </div>
+      <div>
+        <div class="swatch" style="background: #6B6B68;"></div>
+        <div class="swatch-label">Archive Mid<br>#6B6B68</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     05 — UX CHALLENGE
+════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">05 / The UX Challenge</span>
+      <h2 class="section-title">Two things pulling in opposite directions.</h2>
+    </div>
+
+    <div class="section-body" style="margin-bottom: 0;">
+      <p>
+        The central design tension was this: nostalgia is atmospheric and slow;
+        e-commerce needs to be fast and obvious. The entire project is an exercise
+        in holding both at once without breaking either.
+      </p>
+    </div>
+
+    <div class="challenge-list">
+      <div class="challenge-item">
+        <div class="challenge-num">01</div>
+        <div class="challenge-text">
+          <h4>Nostalgia vs. Usability</h4>
+          <p>Every editorial decision had to pass a usability test. If a navigation pattern felt
+          nostalgic but confused users, it was redesigned. The atmosphere had to serve the
+          shopping experience, not compete with it.</p>
+        </div>
+      </div>
+      <div class="challenge-item">
+        <div class="challenge-num">02</div>
+        <div class="challenge-text">
+          <h4>Storytelling vs. Conversion</h4>
+          <p>The homepage is designed to introduce the brand world before it sells anything.
+          Balancing the brand film, editorial moments, and the immediate ability to shop
+          required careful information architecture at the homepage level.</p>
+        </div>
+      </div>
+      <div class="challenge-item">
+        <div class="challenge-num">03</div>
+        <div class="challenge-text">
+          <h4>Distinctive System vs. Intuitive Shopping</h4>
+          <p>DIALUP's visual language is unusual for e-commerce — archive numbering, CRT
+          references, diary copy. The challenge was ensuring these aesthetic choices
+          reinforced the product rather than creating unnecessary friction in the purchase journey.</p>
+        </div>
+      </div>
+      <div class="challenge-item">
+        <div class="challenge-num">04</div>
+        <div class="challenge-text">
+          <h4>Five Collections, One System</h4>
+          <p>Each collection needed a distinct visual personality while remaining unmistakably
+          part of the same DIALUP design system. The same typographic structure, spacing,
+          and interaction patterns — but with different editorial photography and tonal energy.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     06 — HOMEPAGE
+════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">06 / Homepage</span>
+      <h2 class="section-title">Enter the world first. Shop second.</h2>
+    </div>
+
+    <!-- Hero screen — full width -->
+    <div style="margin-bottom: 24px;">
+      <img class="img-full" src=".user_uploaded/media_1789682486460.png" alt="DIALUP Homepage Hero">
+      <div class="img-caption">Homepage Hero — "LIVE SIGNAL / 00:01:15" · Fashion film with CRT reference</div>
+    </div>
+
+    <div class="two-col" style="margin-top: 60px; margin-bottom: 72px;">
+      <div class="section-body">
+        <p>
+          The homepage opens with a cinematic fashion film. The red room, the model,
+          the vintage CRT television in the corner — all of it communicates the brand
+          world before a single product appears.
+        </p>
+        <p>
+          The navigation is intentionally minimal. "LIVE SIGNAL" ticks in real time
+          in the top-left corner — a small interaction that rewards attention.
+          "KEEP BROWSING ↓" anchors the bottom-right like an editorial footnote.
+        </p>
+      </div>
+      <div class="section-body">
+        <p>
+          The homepage structure: Hero → Shop The Look → Just In → Shop By Collection →
+          Style Them Together → Our Story → Footer. Each section transitions the user
+          naturally from world-building into shopping.
+        </p>
+        <p>
+          The Shop By Collection scroll uses alternating editorial images — a found-object
+          aesthetic rather than a formatted product grid.
+        </p>
+      </div>
+    </div>
+
+    <!-- Collections homepage section -->
+    <div class="img-narrow" style="max-width: 460px;">
+      <img class="img-full" src=".user_uploaded/media_1789680808222.png" alt="Shop by Collection — Homepage Section">
+      <div class="img-caption">Shop By Collection — alternating editorial photography</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     07 — SHOP THE LOOK
+════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">07 / Shop The Look</span>
+      <h2 class="section-title">This is how DIALUP is worn.</h2>
+    </div>
+
+    <div class="two-col" style="align-items: center; margin-bottom: 60px;">
+      <div class="img-narrow" style="max-width: 420px;">
+        <img class="img-full" src=".user_uploaded/media_1789680766461.png" alt="Shop The Look editorial view">
+        <div class="img-caption">Look 01 / Photographed in the Archive</div>
+      </div>
+      <div>
+        <div class="label" style="margin-bottom: 20px;">Editorial Discovery</div>
+        <div class="section-body">
+          <p>
+            Instead of presenting products in an isolated grid, Shop The Look lets the
+            user discover them through a complete fashion look. The model becomes the
+            point of entry.
+          </p>
+          <p>
+            Products are numbered and overlaid directly on the editorial image —
+            a catalogue convention that feels specific rather than generic. Tapping any
+            numbered callout leads directly to the canonical product detail page.
+          </p>
+          <p>
+            "THIS IS HOW DIALUP IS WORN." — the tagline does the work. It's not
+            a feature name. It's a declaration.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     08 — STYLE THEM TOGETHER
+════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">08 / Style Them Together</span>
+      <h2 class="section-title">Three pieces. One look.</h2>
+    </div>
+
+    <div style="margin-bottom: 24px;">
+      <img class="img-full" src=".user_uploaded/media_1789681621348.png" alt="Style Them Together — Leather After Dark">
+      <div class="img-caption">Style Them Together / 01 — "LEATHER, AFTER DARK"</div>
+    </div>
+
+    <div class="two-col" style="margin-top: 60px;">
+      <div class="section-body">
+        <p>
+          Style Them Together is a separate editorial interaction. Rather than suggesting
+          individual products, it shows three existing DIALUP pieces together, styled on
+          a model wearing all of them at once.
+        </p>
+      </div>
+      <div class="section-body">
+        <p>
+          The left column lists each product with its price. The right panel is the editorial
+          fashion photograph. The model makes the abstract combination real — you see how
+          the pieces work together before you decide to buy any of them.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     09 — COLLECTIONS
+════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">09 / Collections</span>
+      <h2 class="section-title">Five worlds. One system.</h2>
+    </div>
+
+    <div class="section-body" style="margin-bottom: 72px;">
+      <p>
+        Each collection has its own visual personality — distinct editorial photography,
+        tonal energy, and tagline — while the underlying design system remains consistent.
+        Same structure. Same spacing. Same typographic hierarchy. Different world.
+      </p>
+    </div>
+
+    <!-- Two collections side by side -->
+    <div class="img-group two" style="margin-bottom: 32px; align-items: start;">
+      <div>
+        <img class="img-full" src=".user_uploaded/media_1789680766463.png" alt="Worn Out Collection">
+        <div class="img-caption">WORN OUT — Collection 02 / "Lived-in denim, on repeat."</div>
+      </div>
+      <div>
+        <img class="img-full" src=".user_uploaded/media_1789680914584.png" alt="Stuck in 1998 Collection">
+        <div class="img-caption">STUCK IN 1998 — Collection 03 / "A little louder, still on repeat."</div>
+      </div>
+    </div>
+
+    <!-- Misplaced — full width editorial -->
+    <div style="margin-bottom: 24px;">
+      <img class="img-full" src=".user_uploaded/media_1789680926398.png" alt="Misplaced Collection Cover">
+      <div class="img-caption">MISPLACED — Collection 04 / Archive Cover — found objects, analog atmosphere</div>
+    </div>
+
+    <div class="section-body" style="margin-top: 48px;">
+      <p>
+        Misplaced uses found-object photography — an old keyboard buried under gold chains,
+        a lipstick, a martini glass. It communicates "accessories" without ever labelling
+        them that way. The image is the product description.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     10 — PRODUCT EXPERIENCE
+════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">10 / Product Experience</span>
+      <h2 class="section-title">The same product. Every entry point.</h2>
+    </div>
+
+    <div class="two-col" style="align-items: start; margin-bottom: 60px;">
+      <div class="img-narrow" style="max-width: 420px;">
+        <img class="img-full" src=".user_uploaded/media_1789680766716.png" alt="Product Detail Page — The Wash">
+        <div class="img-caption">PDP — THE WASH / Worn Out Archive Piece / $84</div>
+      </div>
+      <div>
+        <div class="label" style="margin-bottom: 20px;">Connected Product System</div>
+        <div class="section-body">
+          <p>
+            Every product in DIALUP exists in shared data. Whether the user finds it through
+            a collection page, Shop The Look, Style Them Together, search, saved items,
+            or the bag — it's always the same product, with the same image, name, price,
+            and description.
+          </p>
+          <p>
+            The PDP layout is deliberately editorial: a large product image, the collection
+            label in red, the product name in oversized serif type, price, description,
+            size selection, Save and Add to Bag.
+          </p>
+          <p>
+            Nothing competes with the product. The interface recedes.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     11 — SAVED ITEMS + BAG
+════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">11 / Saved Items &amp; Bag</span>
+      <h2 class="section-title">Archive-style. Zero friction.</h2>
+    </div>
+
+    <div class="two-col" style="align-items: start;">
+      <div class="img-narrow" style="max-width: 420px;">
+        <img class="img-full" src=".user_uploaded/media_1789680766664.png" alt="DIALUP Archive Bag Drawer">
+        <div class="img-caption">DIALUP ARCHIVE / BAG — numbered entries, archive typography</div>
+      </div>
+      <div>
+        <div class="label" style="margin-bottom: 20px;">The Bag</div>
+        <div class="section-body">
+          <p>
+            The bag drawer is designed as an archive receipt rather than a standard cart.
+            Each item is numbered. The typography is monospace-influenced. The "CHECKOUT →"
+            link at the bottom reads like a found document rather than a button.
+          </p>
+          <p>
+            The empty state — "BAG / 00 / NOTHING HERE YET. / KEEP BROWSING →" — maintains
+            the brand voice even in a zero-state. It doesn't feel like an error message.
+            It feels like the brand talking.
+          </p>
+          <p>
+            Quantity controls are minimal square inputs. Remove links are in red. The total
+            is understated. Everything functional, nothing loud.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     13 — OUR STORY
+════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">13 / Our Story</span>
+      <h2 class="section-title">Dear Diary,</h2>
+    </div>
+
+    <div style="margin-bottom: 24px;">
+      <img class="img-full" src=".user_uploaded/media_1789680978999.png" alt="Our Story — Dear Diary, Today We Went Back">
+      <div class="img-caption">OUR STORY — DIALUP ARCHIVE / 001 · "TODAY, WE WENT BACK."</div>
+    </div>
+
+    <div class="two-col" style="margin-top: 60px;">
+      <div class="section-body">
+        <p>
+          Our Story doesn't function like a standard About page. It opens with a diary
+          entry — "Dear Diary," in italic red. Then the headline: "TODAY, WE WENT BACK."
+          in massive black serif type. And a datestamp: 09.18.98.
+        </p>
+      </div>
+      <div class="section-body">
+        <p>
+          The DIALUP magazine prop appears mid-page — a fictional artefact from the brand
+          world. "FOUND AGAIN / PAGE 01." The page closes with the brand sign-off:
+          "— DIALUP" centered at the bottom, like a letter ending.
+        </p>
+        <p>
+          Before everything became a feed, fashion was something you found. This section
+          makes that feeling tangible.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     15 — REFLECTION
+════════════════════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">15 / Reflection</span>
+      <h2 class="section-title">What this project taught me.</h2>
+    </div>
+
+    <div class="section-body">
+      <p>
+        DIALUP was a deliberate challenge: design something that has a strong, unusual
+        visual personality and still works as a functional shopping experience.
+        Here is what I actually learned from doing it.
+      </p>
+    </div>
+
+    <div class="reflection-grid">
+      <div class="reflection-item">
+        <div class="label">Nostalgia as function, not decoration</div>
+        <p style="margin-top: 16px;">
+          Every nostalgic element in DIALUP earns its place by doing something useful.
+          The archive numbering organises products. The CRT reference communicates
+          the hero moment. The diary format gives the Our Story page a distinct voice.
+          Atmosphere without function is just decoration.
+        </p>
+      </div>
+      <div class="reflection-item">
+        <div class="label">Consistency across a distinctive system</div>
+        <p style="margin-top: 16px;">
+          Maintaining five collections that each feel different but unmistakably DIALUP
+          required a strict design system underneath the editorial variation. Spacing,
+          typographic hierarchy, the red accent, the archive numbering — these were
+          the constants everything else could deviate from.
+        </p>
+      </div>
+      <div class="reflection-item">
+        <div class="label">The connected product model</div>
+        <p style="margin-top: 16px;">
+          Designing multiple discovery paths (collections, looks, style, search) that
+          all lead to the same product without inconsistency forced me to think about
+          information architecture as a system rather than individual screens.
+          Each entry point needed to feel native to where it came from.
+        </p>
+      </div>
+      <div class="reflection-item">
+        <div class="label">Design into implementation</div>
+        <p style="margin-top: 16px;">
+          Taking DIALUP from Figma into a working React implementation revealed where
+          the design was fragile. Small details that looked intentional in a static frame
+          — spacing, hover states, drawer transitions — had to be deliberately rebuilt
+          in code. Implementation is the second design review.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     16 — FINAL
+════════════════════════════════════════ -->
+<section class="final">
+  <div class="final-title">DIAL<span>up</span></div>
+  <div class="final-sub">A Call From the 90s.</div>
+  <div class="final-links">
+    <a href="./portfolio.html" class="final-link">← Back to Portfolio</a>
+  </div>
+</section>
+
+</body>
+</html>
